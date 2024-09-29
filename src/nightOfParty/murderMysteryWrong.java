@@ -48,14 +48,8 @@ public class murderMysteryWrong {
     }
 
     public HashMap<String, Integer> groceryList(LinkedListNode<guestInformation> guest) {
-        //NEW HASHMAP IS BEING MADE EVERY TIME
-        this.food = new HashMap<>();
-
-        // Iterate through the linked list of guests
         while (guest != null) {
             String guestMeal = guest.getValue().getMealChoice();
-
-            // Update the count of the meal type
             if (this.food.containsKey(guestMeal)) {
                 this.food.put(guestMeal, this.food.get(guestMeal) + 1);
             } else {

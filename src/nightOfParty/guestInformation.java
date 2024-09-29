@@ -6,9 +6,8 @@ public class guestInformation {
     private String mealChoice;
 
     public guestInformation(String name, String mealChoice){
-        //WRONG, SHOULD BE SWITCHED
-        this.name = mealChoice;
-        this.mealChoice = name;
+        this.name = name;
+        this.mealChoice = mealChoice;
     }
 
     public String getName(){

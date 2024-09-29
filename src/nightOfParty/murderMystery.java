@@ -31,10 +31,6 @@ public class murderMystery {
     }
 
     public HashMap<String, Integer> groceryList(LinkedListNode<guestInformation> guest) {
-        if (this.food == null) {
-            this.food = new HashMap<>();
-        }
-
         while (guest != null) {
             String guestMeal = guest.getValue().getMealChoice();
             if (this.food.containsKey(guestMeal)) {
