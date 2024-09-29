@@ -1,7 +1,7 @@
 package nightOfParty;
 
-//THIS IS FAIR GAME
 public class guestInformation {
+    //THIS IS FAIR GAME
     private String name;
     private String mealChoice;
 
@@ -11,13 +11,13 @@ public class guestInformation {
     }
 
     public String getName(){
-        return this.name;
+        return this.mealChoice;
     }
     public void setName(String name){
         this.name = name;
     }
     public String getMealChoice(){
-        return this.mealChoice;
+        return this.name;
     }
     public void setMealChoice(String meal){
         this.mealChoice = meal;
