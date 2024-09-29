@@ -4,19 +4,14 @@ import dataStructures.LinkedListNode;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//THIS IS FAIR GAME
 public class murderMystery {
+    //THIS IS FAIR GAME
+
     private LinkedListNode<guestInformation> guestList;
 
     private HashMap<String, Integer> food;
 
     private ArrayList<String> guestsNotConfirmed;
-
-    public murderMystery(LinkedListNode<guestInformation> guestList, HashMap<String,Integer> food, ArrayList<String> guestsNotConfirmed){
-        this.guestList = guestList;
-        this.food = food;
-        this.guestsNotConfirmed = guestsNotConfirmed;
-    }
 
     public LinkedListNode<guestInformation> getGuestList() {
         return this.guestList;
@@ -30,6 +25,29 @@ public class murderMystery {
         return this.guestsNotConfirmed;
     }
 
+
+    public murderMystery(LinkedListNode<guestInformation> guestList, HashMap<String,Integer> food, ArrayList<String> guestsNotConfirmed){
+        this.guestList = guestList;
+        this.food = food;
+        this.guestsNotConfirmed = guestsNotConfirmed;
+    }
+
+    public void addGuest(guestInformation guest) {
+        if (this.guestList.getValue() == null) {
+            this.guestList = null;
+        } else {
+            this.addGuestHelper(this.guestList, guest);
+        }
+    }
+
+    public void addGuestHelper(LinkedListNode<guestInformation> guest, guestInformation newGuest) {
+        if (guest.getNext() == null) {
+            guest.setNext(new dataStructures.LinkedListNode<>(newGuest,null)) ;
+        } else {
+            this.addGuestHelper(guest.getNext(),newGuest);
+        }
+    }
+
     public HashMap<String, Integer> groceryList(LinkedListNode<guestInformation> guest) {
         while (guest != null) {
             String guestMeal = guest.getValue().getMealChoice();
@@ -38,39 +56,20 @@ public class murderMystery {
             } else {
                 this.food.put(guestMeal, 1);
             }
-            guest = guest.getNext();
         }
-
         return this.food;
     }
-
-    public void addGuest(guestInformation guest) {
-        if (this.guestList.getValue() == null) {
-            this.guestList = new LinkedListNode<>(guest, null);
-        } else {
-            this.append(this.guestList, guest);
-        }
-    }
-
-    public void append(LinkedListNode<guestInformation> guest, guestInformation newGuest) {
-        if (guest.getNext() == null) {
-            guest.setNext(new dataStructures.LinkedListNode<>(newGuest,null)) ;
-        } else {
-            this.append(guest.getNext(),newGuest);
-        }
-    }
-
 
     public void guestsToCall(ArrayList<String> listOfGuests){
         ArrayList<String> guestsComing = new ArrayList<>();
         LinkedListNode<guestInformation> guest = this.guestList;
 
-        while(guest!=null){
+        while(guest.getValue()!=null){
             guestsComing.add(guest.getValue().getName());
             guest = guest.getNext();
         }
 
-        for (int i = 0; i != guestsComing.size(); i++) {
+        for (int i = 0; i <= guestsComing.size(); i++) {
             String person = guestsComing.get(i);
             if(!listOfGuests.contains(person)){
                 this.guestsNotConfirmed.add(person);

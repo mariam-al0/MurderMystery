@@ -1,7 +1,6 @@
 package dataStructures;
 
 public class LinkedListNode<T> {
-
     //THIS CODE IS GIVEN TO YOU, THERE ARE NO ISSUES WITHIN HERE. I PROMISE. --MARIAM :}
     private T value;
     private LinkedListNode<T> next;
