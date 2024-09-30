@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class test {
 
     //THIS CODE IS GIVEN TO YOU, THERE ARE NO ISSUES WITHIN HERE. I PROMISE. --MARIAM :}
-
     @Test
     public void testAddGuest() {
         murderMystery party = new murderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
