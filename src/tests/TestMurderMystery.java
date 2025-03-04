@@ -1,8 +1,8 @@
 package tests;
 
 import dataStructures.LinkedListNode;
-import nightOfParty.guestInformation;
-import nightOfParty.murderMystery;
+import nightOfParty.GuestInformation;
+import nightOfParty.MurderMystery;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -11,16 +11,16 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-public class test {
+public class TestMurderMystery {
 
     //THIS CODE IS GIVEN TO YOU, THERE ARE NO ISSUES WITHIN HERE. I PROMISE. --MARIAM :}
     @Test
     public void testAddGuest() {
-        murderMystery party = new murderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
+        MurderMystery party = new MurderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
 
-        guestInformation guest1 = new guestInformation("Jesse", "Steak");
+        GuestInformation guest1 = new GuestInformation("Jesse", "Steak");
         party.addGuest(guest1);
-        LinkedListNode<guestInformation> guestList = party.getGuestList();
+        LinkedListNode<GuestInformation> guestList = party.getGuestList();
 
         assertNotNull(guestList);
         assertEquals("Jesse", guestList.getValue().getName());
@@ -29,15 +29,15 @@ public class test {
 
     @Test
     public void testAppendGuest() {
-        murderMystery party = new murderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
+        MurderMystery party = new MurderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
 
-        guestInformation guest1 = new guestInformation("Jesse", "Steak");
-        guestInformation guest2 = new guestInformation("Naeem", "Pasta");
+        GuestInformation guest1 = new GuestInformation("Jesse", "Steak");
+        GuestInformation guest2 = new GuestInformation("Naeem", "Pasta");
 
         party.addGuest(guest1);
         party.addGuest(guest2);
 
-        LinkedListNode<guestInformation> guestList = party.getGuestList();
+        LinkedListNode<GuestInformation> guestList = party.getGuestList();
 
         assertEquals("Naeem", guestList.getNext().getValue().getName());
         assertEquals("Pasta", guestList.getNext().getValue().getMealChoice());
@@ -46,11 +46,11 @@ public class test {
     @Test
     public void testGroceryList() {
 
-        murderMystery party = new murderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
+        MurderMystery party = new MurderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
 
-        guestInformation guest1 = new guestInformation("Jesse", "Steak");
-        guestInformation guest2 = new guestInformation("Naeem", "Pasta");
-        guestInformation guest3 = new guestInformation("Paul", "Steak");
+        GuestInformation guest1 = new GuestInformation("Jesse", "Steak");
+        GuestInformation guest2 = new GuestInformation("Naeem", "Pasta");
+        GuestInformation guest3 = new GuestInformation("Paul", "Steak");
 
         party.addGuest(guest1);
         party.addGuest(guest2);
@@ -67,12 +67,12 @@ public class test {
     @Test
     public void testGuestsToCall() {
 
-        murderMystery party = new murderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
+        MurderMystery party = new MurderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
 
-        guestInformation guest1 = new guestInformation("Jesse", "Steak");
-        guestInformation guest2 = new guestInformation("Naeem", "Pasta");
+        GuestInformation guest1 = new GuestInformation("Jesse", "Steak");
+        GuestInformation guest2 = new GuestInformation("Naeem", "Pasta");
         //Paul changed his mind, it's Paul's fault
-        guestInformation guest3 = new guestInformation("Paul", "Chicken");
+        GuestInformation guest3 = new GuestInformation("Paul", "Chicken");
 
         party.addGuest(guest1);
         party.addGuest(guest2);

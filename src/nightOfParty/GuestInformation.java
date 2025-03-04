@@ -1,11 +1,11 @@
 package nightOfParty;
 
-public class guestInformation {
+public class GuestInformation {
     //THIS IS FAIR GAME
     private String name;
     private String mealChoice;
 
-    public guestInformation(String name, String mealChoice){
+    public GuestInformation(String name, String mealChoice){
         this.name = name;
         this.mealChoice = mealChoice;
     }

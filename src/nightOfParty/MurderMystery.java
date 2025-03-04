@@ -4,16 +4,16 @@ import dataStructures.LinkedListNode;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class murderMystery {
+public class MurderMystery {
     //THIS IS FAIR GAME
 
-    private LinkedListNode<guestInformation> guestList;
+    private LinkedListNode<GuestInformation> guestList;
 
     private HashMap<String, Integer> food;
 
     private ArrayList<String> guestsNotConfirmed;
 
-    public LinkedListNode<guestInformation> getGuestList() {
+    public LinkedListNode<GuestInformation> getGuestList() {
         return this.guestList;
     }
 
@@ -26,13 +26,13 @@ public class murderMystery {
     }
 
 
-    public murderMystery(LinkedListNode<guestInformation> guestList, HashMap<String,Integer> food, ArrayList<String> guestsNotConfirmed){
+    public MurderMystery(LinkedListNode<GuestInformation> guestList, HashMap<String,Integer> food, ArrayList<String> guestsNotConfirmed){
         this.guestList = guestList;
         this.food = food;
         this.guestsNotConfirmed = guestsNotConfirmed;
     }
 
-    public void addGuest(guestInformation guest) {
+    public void addGuest(GuestInformation guest) {
         if (this.guestList.getValue() == null) {
             this.guestList = null;
         } else {
@@ -40,7 +40,7 @@ public class murderMystery {
         }
     }
 
-    public void addGuestHelper(LinkedListNode<guestInformation> guest, guestInformation newGuest) {
+    public void addGuestHelper(LinkedListNode<GuestInformation> guest, GuestInformation newGuest) {
         if (guest.getNext() == null) {
             guest.setNext(new dataStructures.LinkedListNode<>(newGuest,null)) ;
         } else {
@@ -48,7 +48,7 @@ public class murderMystery {
         }
     }
 
-    public HashMap<String, Integer> groceryList(LinkedListNode<guestInformation> guest) {
+    public HashMap<String, Integer> groceryList(LinkedListNode<GuestInformation> guest) {
         while (guest != null) {
             String guestMeal = guest.getValue().getMealChoice();
             if (this.food.containsKey(guestMeal)) {
@@ -62,7 +62,7 @@ public class murderMystery {
 
     public void guestsToCall(ArrayList<String> listOfGuests){
         ArrayList<String> guestsComing = new ArrayList<>();
-        LinkedListNode<guestInformation> guest = this.guestList;
+        LinkedListNode<GuestInformation> guest = this.guestList;
 
         while(guest.getValue()!=null){
             guestsComing.add(guest.getValue().getName());
