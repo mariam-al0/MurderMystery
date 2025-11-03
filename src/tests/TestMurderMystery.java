@@ -6,7 +6,6 @@ import nightOfParty.GuestInformation;
 import nightOfParty.MurderMystery;
 import org.junit.Test;
 
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
@@ -18,7 +17,7 @@ public class TestMurderMystery {
     //THIS CODE IS GIVEN TO YOU, THERE ARE NO ISSUES WITHIN HERE. I PROMISE.
     @Test
     public void testAddGuest() {
-        MurderMystery party = new MurderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
+        MurderMystery party = new MurderMystery(null, new HashMap<>(), new ArrayList<>());
 
         GuestInformation guest1 = new GuestInformation("Jesse", "Steak");
         party.addGuest(guest1);
@@ -31,7 +30,7 @@ public class TestMurderMystery {
 
     @Test
     public void testAppendGuest() {
-        MurderMystery party = new MurderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
+        MurderMystery party = new MurderMystery(null, new HashMap<>(), new ArrayList<>());
 
         GuestInformation guest1 = new GuestInformation("Jesse", "Steak");
         GuestInformation guest2 = new GuestInformation("Gary", "Pasta");
@@ -41,6 +40,7 @@ public class TestMurderMystery {
 
         LinkedListNode<GuestInformation> guestList = party.getGuestList();
 
+        assertNotNull(guestList);
         assertEquals("Gary", guestList.getNext().getValue().getName());
         assertEquals("Pasta", guestList.getNext().getValue().getMealChoice());
     }

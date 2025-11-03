@@ -34,10 +34,10 @@ public class MurderMystery {
     }
 
     public void addGuest(GuestInformation guest) {
-        if (this.guestList.getValue() == null) {
-            this.guestList = null;
-        } else {
+        if (this.guestList != null) {
             this.addGuestHelper(this.guestList, guest);
+        } else {
+            this.guestList = this.getGuestList();
         }
     }
 
