@@ -11,7 +11,7 @@ public class GuestInformation {
     }
 
     public String getName(){
-        return this.mealChoice;
+        return this.name;
     }
     public void setName(String name){
         this.name = name;

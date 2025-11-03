@@ -1,10 +1,12 @@
 package tests;
 
+import dataStructures.BinaryTreeNode;
 import dataStructures.LinkedListNode;
 import nightOfParty.GuestInformation;
 import nightOfParty.MurderMystery;
 import org.junit.Test;
 
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 
 public class TestMurderMystery {
 
-    //THIS CODE IS GIVEN TO YOU, THERE ARE NO ISSUES WITHIN HERE. I PROMISE. --MARIAM :}
+    //THIS CODE IS GIVEN TO YOU, THERE ARE NO ISSUES WITHIN HERE. I PROMISE.
     @Test
     public void testAddGuest() {
         MurderMystery party = new MurderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
@@ -32,63 +34,47 @@ public class TestMurderMystery {
         MurderMystery party = new MurderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
 
         GuestInformation guest1 = new GuestInformation("Jesse", "Steak");
-        GuestInformation guest2 = new GuestInformation("Naeem", "Pasta");
+        GuestInformation guest2 = new GuestInformation("Gary", "Pasta");
 
         party.addGuest(guest1);
         party.addGuest(guest2);
 
         LinkedListNode<GuestInformation> guestList = party.getGuestList();
 
-        assertEquals("Naeem", guestList.getNext().getValue().getName());
+        assertEquals("Gary", guestList.getNext().getValue().getName());
         assertEquals("Pasta", guestList.getNext().getValue().getMealChoice());
     }
 
     @Test
     public void testGroceryList() {
 
-        MurderMystery party = new MurderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
-
         GuestInformation guest1 = new GuestInformation("Jesse", "Steak");
-        GuestInformation guest2 = new GuestInformation("Naeem", "Pasta");
+        GuestInformation guest2 = new GuestInformation("Gary", "Pasta");
         GuestInformation guest3 = new GuestInformation("Paul", "Steak");
 
-        party.addGuest(guest1);
-        party.addGuest(guest2);
-        party.addGuest(guest3);
+        BinaryTreeNode<GuestInformation> chefTree = new BinaryTreeNode<>(guest1,
+                new BinaryTreeNode<GuestInformation>(guest2,null,null),
+                new BinaryTreeNode<>(guest3,null,null));
 
-        party.groceryList(party.getGuestList());
-        HashMap<String, Integer> foodMap = party.getFood();
+        HashMap<String, Integer> food = MurderMystery.groceryList(chefTree);
 
-        assertNotNull(foodMap);
-        assertEquals(foodMap.get("Steak").intValue(),2);
-        assertEquals(1, foodMap.get("Pasta").intValue());
+        assertEquals(food.get("Steak"), Integer.valueOf(2));
+        assertEquals(food.get("Pasta"), Integer.valueOf(1));
     }
 
     @Test
     public void testGuestsToCall() {
-
-        MurderMystery party = new MurderMystery(new LinkedListNode<>(null,null), new HashMap<>(), new ArrayList<>());
-
         GuestInformation guest1 = new GuestInformation("Jesse", "Steak");
-        GuestInformation guest2 = new GuestInformation("Naeem", "Pasta");
-        //Paul changed his mind, it's Paul's fault
-        GuestInformation guest3 = new GuestInformation("Paul", "Chicken");
+        GuestInformation guest2 = new GuestInformation("Gary", "Pasta");
+        GuestInformation guest3 = new GuestInformation("Paul", "Steak");
+        GuestInformation guest4 = new GuestInformation("Secret Murder Guy", "Horse");
 
-        party.addGuest(guest1);
-        party.addGuest(guest2);
-        party.addGuest(guest3);
+        LinkedListNode<GuestInformation> guestList = new LinkedListNode<>(guest1,
+                new LinkedListNode<>(guest2, new LinkedListNode<>(guest3, new LinkedListNode<>(guest4,null))));
 
-        ArrayList<String> confirmedGuests = new ArrayList<>();
-        confirmedGuests.add("Jesse");
-        confirmedGuests.add("Naeem");
-
-        party.guestsToCall(confirmedGuests);
-
-        ArrayList<String> notConfirmed = party.guestsNotConfirmed();
-
-        assertEquals(1, notConfirmed.size());
-        assertTrue(notConfirmed.contains("Paul"));
-
+        assertTrue(MurderMystery.guestsToCall(guestList, "Jesse"));
+        assertTrue(MurderMystery.guestsToCall(guestList, "Gary"));
+        assertTrue(MurderMystery.guestsToCall(guestList, "Paul"));
+        assertTrue(MurderMystery.guestsToCall(guestList, "Secret Murder Guy"));
     }
 }
-

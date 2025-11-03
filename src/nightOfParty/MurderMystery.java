@@ -1,4 +1,5 @@
 package nightOfParty;
+import dataStructures.BinaryTreeNode;
 import dataStructures.LinkedListNode;
 
 import java.util.ArrayList;
@@ -13,6 +14,13 @@ public class MurderMystery {
 
     private ArrayList<String> guestsNotConfirmed;
 
+
+    public MurderMystery(LinkedListNode<GuestInformation> guestList, HashMap<String,Integer> food, ArrayList<String> guestsNotConfirmed){
+        this.guestList = guestList;
+        this.food = food;
+        this.guestsNotConfirmed = guestsNotConfirmed;
+    }
+
     public LinkedListNode<GuestInformation> getGuestList() {
         return this.guestList;
     }
@@ -23,13 +31,6 @@ public class MurderMystery {
 
     public ArrayList<String> guestsNotConfirmed() {
         return this.guestsNotConfirmed;
-    }
-
-
-    public MurderMystery(LinkedListNode<GuestInformation> guestList, HashMap<String,Integer> food, ArrayList<String> guestsNotConfirmed){
-        this.guestList = guestList;
-        this.food = food;
-        this.guestsNotConfirmed = guestsNotConfirmed;
     }
 
     public void addGuest(GuestInformation guest) {
@@ -48,34 +49,31 @@ public class MurderMystery {
         }
     }
 
-    public HashMap<String, Integer> groceryList(LinkedListNode<GuestInformation> guest) {
-        while (guest != null) {
-            String guestMeal = guest.getValue().getMealChoice();
-            if (this.food.containsKey(guestMeal)) {
-                this.food.put(guestMeal, this.food.get(guestMeal) + 1);
-            } else {
-                this.food.put(guestMeal, 1);
-            }
+    public static void groceryListHelper(BinaryTreeNode<GuestInformation> guest, HashMap<String,Integer> map) {
+        if (map.containsKey(guest.getValue().getMealChoice())) {
+            map.put(guest.getValue().getMealChoice(), map.get(guest.getValue().getMealChoice()) + 1);
+        } else {
+            map.put(guest.getValue().getMealChoice(), 1);
         }
-        return this.food;
+        if (guest.getLeft() != null) {
+            groceryListHelper(guest.getLeft(),map);
+        }
+        if (guest.getRight() != null) {
+            groceryListHelper(guest.getRight(),map);
+        }
+    }
+    public static HashMap<String, Integer> groceryList(BinaryTreeNode<GuestInformation> guest) {
+        HashMap<String,Integer> map = new HashMap<>();
+        groceryListHelper(guest,map);
+        return map;
     }
 
-    public void guestsToCall(ArrayList<String> listOfGuests){
-        ArrayList<String> guestsComing = new ArrayList<>();
-        LinkedListNode<GuestInformation> guest = this.guestList;
-
-        while(guest.getValue()!=null){
-            guestsComing.add(guest.getValue().getName());
-            guest = guest.getNext();
+    public static boolean guestsToCall(LinkedListNode<GuestInformation> guests, String name){
+        if(guests.getValue().getName().equals(name)){
+            return true;
         }
-
-        for (int i = 0; i <= guestsComing.size(); i++) {
-            String person = guestsComing.get(i);
-            if(!listOfGuests.contains(person)){
-                this.guestsNotConfirmed.add(person);
-            }
+        else{
+            return false;
         }
-
     }
-
 }
